@@ -11,7 +11,7 @@ class TestApp(unittest.TestCase):
         self.assertEqual(app.check_document_existance('11-2'), True)
         self.assertEqual(app.check_document_existance('100'), False)
 
-    @patch('app.input')
+    @patch('builtins.input')
     def test_get_owner_name(self, user_input):
         user_input.side_effect = ['10006']
         self.assertEqual(app.get_doc_owner_name(), 'Аристарх Павлов')
@@ -23,19 +23,19 @@ class TestApp(unittest.TestCase):
         app.remove_doc_from_shelf('11-2')
         self.assertEqual(app.directories['1'], ['2207 876234', '5455 028765'])
 
-    @patch('app.input')
+    @patch('builtins.input')
     def test_move_doc_to_shelf(self, user_input):
         user_input.side_effect = ['10006', '2']
         app.move_doc_to_shelf()
         self.assertEqual(app.directories['2'], ['10006'])
 
-    @patch('app.input')
+    @patch('builtins.input')
     def test_get_doc_shelf(self, user_input):
         user_input.side_effect = ['2207 876234']
         shelf = app.get_doc_shelf()
         self.assertEqual(shelf, '1')
 
-    @patch('app.input')
+    @patch('builtins.input')
     def test_delete_doc(self, user_input):
         user_input.side_effect = ['11-2']
         self.assertEqual(app.delete_doc(), ('11-2', True))
